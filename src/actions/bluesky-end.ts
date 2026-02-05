@@ -22,14 +22,23 @@ export class BlueSkyEndAction extends SingletonAction<Settings> {
             await agent.login({ identifier: handle, password: appPassword });
             streamDeck.logger.info('✅ Login successful');
 
-            // Delete the live status record
+            // Delete the live status record (may already be expired if stream ran over duration)
             streamDeck.logger.info('⏹️ Clearing live status...');
-            await agent.com.atproto.repo.deleteRecord({
-                repo: agent.session!.did,
-                collection: 'app.bsky.actor.status',
-                rkey: 'self',
-            });
-            streamDeck.logger.info('✅ Live status cleared successfully');
+            try {
+                await agent.com.atproto.repo.deleteRecord({
+                    repo: agent.session!.did,
+                    collection: 'app.bsky.actor.status',
+                    rkey: 'self',
+                });
+                streamDeck.logger.info('✅ Live status cleared successfully');
+            } catch (deleteError: any) {
+                const errorMessage = deleteError?.message || String(deleteError);
+                if (errorMessage.includes('RecordNotFound') || errorMessage.includes('Could not find record')) {
+                    streamDeck.logger.info('ℹ️ Live status was already expired/cleared — no action needed');
+                } else {
+                    throw deleteError;
+                }
+            }
 
             // Show success
             await ev.action.showOk();
