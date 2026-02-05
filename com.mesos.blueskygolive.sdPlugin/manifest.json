@@ -1,0 +1,64 @@
+{
+	"Name": "BlueSkyGoLive",
+	"Version": "0.1.0.0",
+	"Author": "mesos",
+	"Actions": [
+		{
+			"Name": "Go Live on Bluesky",
+			"UUID": "com.mesos.blueskygolive.post",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Post to Bluesky and set your live status",
+			"PropertyInspectorPath": "ui/property-inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "End Stream on Bluesky",
+			"UUID": "com.mesos.blueskygolive.end",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Clear your live status on Bluesky",
+			"PropertyInspectorPath": "ui/property-inspector-end.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			]
+		}
+	],
+	"Category": "BlueSkyGoLive",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"PropertyInspectorPath": "ui/property-inspector.html",
+	"Description": "Allows you to customize a go live post for bluesky and set the Go Live status as well",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.9"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "com.mesos.blueskygolive"
+}

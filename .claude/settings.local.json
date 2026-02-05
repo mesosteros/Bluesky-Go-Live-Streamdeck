@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(test:*)",
+      "Bash(node -e:*)",
+      "Bash(npx streamdeck:*)",
+      "Bash(echo:*)"
+    ]
+  }
+}

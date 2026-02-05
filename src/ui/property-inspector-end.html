@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>BlueSky End Stream Settings</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background: #2d2d2d;
+                color: #d8d8d8;
+                margin: 0;
+                padding: 16px;
+                font-size: 13px;
+            }
+            .sdpi-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sdpi-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .sdpi-item-label {
+                font-weight: 500;
+                font-size: 12px;
+                color: #9a9a9a;
+            }
+            .sdpi-item-value {
+                background: #3d3d3d;
+                border: 1px solid #5a5a5a;
+                border-radius: 4px;
+                color: #d8d8d8;
+                padding: 8px;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .sdpi-item-value:focus {
+                outline: none;
+                border-color: #0e6edb;
+            }
+            .info-text {
+                color: #9a9a9a;
+                font-size: 12px;
+                margin-top: 8px;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sdpi-wrapper">
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Bluesky Handle</div>
+                <input
+                    class="sdpi-item-value"
+                    id="handle"
+                    type="text"
+                    placeholder="yourname.bsky.social"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">App Password</div>
+                <input
+                    class="sdpi-item-value"
+                    id="appPassword"
+                    type="password"
+                    placeholder="Paste your app password here"
+                />
+            </div>
+
+            <p class="info-text">
+                This action will clear your live status on Bluesky when pressed.
+            </p>
+        </div>
+
+        <script src="property-inspector-end.js"></script>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>BlueSky Go Live Settings</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background: #2d2d2d;
+                color: #d8d8d8;
+                margin: 0;
+                padding: 16px;
+                font-size: 13px;
+            }
+            .sdpi-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sdpi-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .sdpi-item-label {
+                font-weight: 500;
+                font-size: 12px;
+                color: #9a9a9a;
+            }
+            .sdpi-item-value {
+                background: #3d3d3d;
+                border: 1px solid #5a5a5a;
+                border-radius: 4px;
+                color: #d8d8d8;
+                padding: 8px;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .sdpi-item-value:focus {
+                outline: none;
+                border-color: #0e6edb;
+            }
+            textarea.sdpi-item-value {
+                min-height: 60px;
+                resize: vertical;
+            }
+            .file-input-wrapper {
+                display: flex;
+                gap: 8px;
+            }
+            .file-input-wrapper input[type="text"] {
+                flex: 1;
+            }
+            .browse-button {
+                background: #0e6edb;
+                border: none;
+                border-radius: 4px;
+                color: white;
+                padding: 8px 16px;
+                cursor: pointer;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+            .browse-button:hover {
+                background: #0d5db8;
+            }
+            .browse-button:active {
+                background: #0a4d99;
+            }
+            input[type="file"] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sdpi-wrapper">
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Bluesky Handle</div>
+                <input
+                    class="sdpi-item-value"
+                    id="handle"
+                    type="text"
+                    placeholder="yourname.bsky.social"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">App Password</div>
+                <input
+                    class="sdpi-item-value"
+                    id="appPassword"
+                    type="password"
+                    placeholder="Paste your app password here"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Post Message</div>
+                <textarea
+                    class="sdpi-item-value"
+                    id="message"
+                    placeholder="Streaming some D&D tonight!"
+                ></textarea>
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Twitch URL</div>
+                <input
+                    class="sdpi-item-value"
+                    id="twitchUrl"
+                    type="url"
+                    placeholder="https://twitch.tv/yourchannel"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Go Live Duration</div>
+                <select class="sdpi-item-value" id="duration">
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="20">20 minutes</option>
+                    <option value="25">25 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="35">35 minutes</option>
+                    <option value="40">40 minutes</option>
+                    <option value="45">45 minutes</option>
+                    <option value="50">50 minutes</option>
+                    <option value="55">55 minutes</option>
+                    <option value="60">1 hour</option>
+                    <option value="90">1.5 hours</option>
+                    <option value="120" selected>2 hours</option>
+                    <option value="150">2.5 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="210">3.5 hours</option>
+                    <option value="240">4 hours</option>
+                </select>
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Thumbnail Path</div>
+                <div class="file-input-wrapper">
+                    <input
+                        class="sdpi-item-value"
+                        id="imagePath"
+                        type="text"
+                        placeholder="C:\path\to\thumbnail.png"
+                    />
+                    <button class="browse-button" id="browseButton" type="button">Browse...</button>
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                    />
+                </div>
+            </div>
+
+            <div class="sdpi-item">
+                <div class="sdpi-item-label">Image Alt Text</div>
+                <input
+                    type="text"
+                    class="sdpi-item-value"
+                    id="imageAltText"
+                    placeholder="Stream Thumbnail"
+                />
+            </div>
+        </div>
+
+        <script src="property-inspector.js"></script>
+    </body>
+</html>
