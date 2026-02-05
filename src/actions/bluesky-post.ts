@@ -265,8 +265,10 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                 handle,
                 appPassword,
                 message,
+                twitchUrl,
                 imagePath,
                 imageAltText,
+                duration,
             } = ev.payload.settings;
 
             // Validate required settings
@@ -373,18 +375,36 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             });
             streamDeck.logger.info('✅ Post created successfully');
 
-            // NOTE: "Go Live" Status API is not publicly documented
-            // The app.bsky.actor.status collection does not exist in the official AT Protocol lexicon.
-            // The "Live Now" badge feature (launched Jan 2026) is only available through:
-            // - The official Bluesky app (paste Twitch URL in profile settings)
-            // - Third-party services like PurpleSky (purplesky.dremixam.com)
-            //
-            // Until Bluesky documents the programmatic API for setting live status,
-            // this functionality cannot be implemented. The post above will still be
-            // created successfully with your message and thumbnail.
-            streamDeck.logger.warn('⚠️ Go Live status badge is not available via API');
-            streamDeck.logger.warn('⚠️ Use the official Bluesky app or PurpleSky.dremixam.com to set live status');
-            streamDeck.logger.info('ℹ️ Post created successfully - users can still see your stream announcement');
+            // Set "Go Live" Status
+            if (twitchUrl) {
+                try {
+                    streamDeck.logger.info('🔴 Setting Go Live status...');
+                    const durationMins = parseInt(duration || '120', 10);
+                    await agent.com.atproto.repo.putRecord({
+                        repo: agent.session!.did,
+                        collection: 'app.bsky.actor.status',
+                        rkey: 'self',
+                        record: {
+                            $type: 'app.bsky.actor.status',
+                            status: 'app.bsky.actor.status#live',
+                            embed: {
+                                $type: 'app.bsky.embed.external',
+                                external: {
+                                    uri: twitchUrl,
+                                    title: '',
+                                    description: '',
+                                },
+                            },
+                            durationMinutes: durationMins,
+                            createdAt: new Date().toISOString(),
+                        },
+                    });
+                    streamDeck.logger.info(`✅ Go Live status set successfully (${durationMins} minutes)`);
+                } catch (statusError) {
+                    streamDeck.logger.error(`❌ Failed to set Go Live status: ${statusError}`);
+                    streamDeck.logger.error(`Status error details: ${JSON.stringify(statusError, null, 2)}`);
+                }
+            }
 
             // Show success
             await ev.action.showOk();
