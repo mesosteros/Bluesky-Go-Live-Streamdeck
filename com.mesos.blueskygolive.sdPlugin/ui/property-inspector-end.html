@@ -1,13 +1,11 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>BlueSky End Stream Settings</title>
         <style>
             body {
-                font-family:
-                    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                    Helvetica, Arial, sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                 background: #2d2d2d;
                 color: #d8d8d8;
                 margin: 0;
@@ -39,7 +37,8 @@
                 font-family: inherit;
             }
             .sdpi-item-value:focus {
-                outline: none;
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
                 border-color: #0e6edb;
             }
             .info-text {
@@ -51,24 +50,26 @@
         </style>
     </head>
     <body>
-        <div class="sdpi-wrapper">
+        <div class="sdpi-wrapper" role="form" aria-label="End Stream Settings">
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Bluesky Handle</div>
+                <label class="sdpi-item-label" for="handle">Bluesky Handle</label>
                 <input
                     class="sdpi-item-value"
                     id="handle"
                     type="text"
                     placeholder="yourname.bsky.social"
+                    autocomplete="username"
                 />
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">App Password</div>
+                <label class="sdpi-item-label" for="appPassword">App Password</label>
                 <input
                     class="sdpi-item-value"
                     id="appPassword"
                     type="password"
                     placeholder="Paste your app password here"
+                    autocomplete="off"
                 />
             </div>
 

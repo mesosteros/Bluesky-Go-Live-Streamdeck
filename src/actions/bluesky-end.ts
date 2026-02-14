@@ -31,10 +31,16 @@ export class BlueSkyEndAction extends SingletonAction<Settings> {
                     rkey: 'self',
                 });
                 streamDeck.logger.info('✅ Live status cleared successfully');
-            } catch (deleteError: any) {
-                const errorMessage = deleteError?.message || String(deleteError);
-                if (errorMessage.includes('RecordNotFound') || errorMessage.includes('Could not find record')) {
-                    streamDeck.logger.info('ℹ️ Live status was already expired/cleared — no action needed');
+            } catch (deleteError: unknown) {
+                const errorMessage =
+                    deleteError instanceof Error ? deleteError.message : String(deleteError);
+                if (
+                    errorMessage.includes('RecordNotFound') ||
+                    errorMessage.includes('Could not find record')
+                ) {
+                    streamDeck.logger.info(
+                        'ℹ️ Live status was already expired/cleared — no action needed',
+                    );
                 } else {
                     throw deleteError;
                 }
@@ -54,4 +60,4 @@ export class BlueSkyEndAction extends SingletonAction<Settings> {
 type Settings = {
     handle: string;
     appPassword: string;
-}
+};

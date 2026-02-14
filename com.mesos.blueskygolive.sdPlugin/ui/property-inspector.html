@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>BlueSky Go Live Settings</title>
@@ -37,7 +37,8 @@
                 font-family: inherit;
             }
             .sdpi-item-value:focus {
-                outline: none;
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
                 border-color: #0e6edb;
             }
             textarea.sdpi-item-value {
@@ -67,44 +68,50 @@
             .browse-button:active {
                 background: #0a4d99;
             }
+            .browse-button:focus {
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
+            }
             input[type="file"] {
                 display: none;
             }
         </style>
     </head>
     <body>
-        <div class="sdpi-wrapper">
+        <div class="sdpi-wrapper" role="form" aria-label="Go Live Settings">
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Bluesky Handle</div>
+                <label class="sdpi-item-label" for="handle">Bluesky Handle</label>
                 <input
                     class="sdpi-item-value"
                     id="handle"
                     type="text"
                     placeholder="yourname.bsky.social"
+                    autocomplete="username"
                 />
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">App Password</div>
+                <label class="sdpi-item-label" for="appPassword">App Password</label>
                 <input
                     class="sdpi-item-value"
                     id="appPassword"
                     type="password"
                     placeholder="Paste your app password here"
+                    autocomplete="off"
                 />
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Post Message</div>
+                <label class="sdpi-item-label" for="message">Post Message</label>
                 <textarea
                     class="sdpi-item-value"
                     id="message"
-                    placeholder="Streaming some D&D tonight!"
+                    placeholder="Streaming some D&amp;D tonight!"
                 ></textarea>
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Twitch URL</div>
+                <label class="sdpi-item-label" for="twitchUrl">Twitch URL</label>
                 <input
                     class="sdpi-item-value"
                     id="twitchUrl"
@@ -114,7 +121,7 @@
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Go Live Duration</div>
+                <label class="sdpi-item-label" for="duration">Go Live Duration</label>
                 <select class="sdpi-item-value" id="duration">
                     <option value="5">5 minutes</option>
                     <option value="10">10 minutes</option>
@@ -138,25 +145,33 @@
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Thumbnail Path</div>
+                <label class="sdpi-item-label" for="imagePath">Thumbnail Path</label>
                 <div class="file-input-wrapper">
                     <input
                         class="sdpi-item-value"
                         id="imagePath"
                         type="text"
                         placeholder="C:\path\to\thumbnail.png"
+                        aria-describedby="browseButton"
                     />
-                    <button class="browse-button" id="browseButton" type="button">Browse...</button>
+                    <button
+                        class="browse-button"
+                        id="browseButton"
+                        type="button"
+                        aria-label="Browse for thumbnail image"
+                    >Browse...</button>
                     <input
                         type="file"
                         id="fileInput"
                         accept="image/*"
+                        aria-hidden="true"
+                        tabindex="-1"
                     />
                 </div>
             </div>
 
             <div class="sdpi-item">
-                <div class="sdpi-item-label">Image Alt Text</div>
+                <label class="sdpi-item-label" for="imageAltText">Image Alt Text</label>
                 <input
                     type="text"
                     class="sdpi-item-value"

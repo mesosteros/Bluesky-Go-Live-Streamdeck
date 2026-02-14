@@ -28,14 +28,9 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
     private async convertGifToMp4(gifPath: string): Promise<string> {
         return new Promise((resolve, reject) => {
             const tempDir = os.tmpdir();
-            const outputPath = path.join(
-                tempDir,
-                `bluesky-video-${Date.now()}.mp4`,
-            );
+            const outputPath = path.join(tempDir, `bluesky-video-${Date.now()}.mp4`);
 
-            streamDeck.logger.info(
-                `🎬 Converting GIF to MP4: ${gifPath} -> ${outputPath}`,
-            );
+            streamDeck.logger.info(`🎬 Converting GIF to MP4: ${gifPath} -> ${outputPath}`);
 
             ffmpeg(gifPath)
                 .outputOptions([
@@ -58,15 +53,11 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                     }
                 })
                 .on('end', () => {
-                    streamDeck.logger.info(
-                        `✅ GIF to MP4 conversion completed: ${outputPath}`,
-                    );
+                    streamDeck.logger.info(`✅ GIF to MP4 conversion completed: ${outputPath}`);
                     resolve(outputPath);
                 })
                 .on('error', (err) => {
-                    streamDeck.logger.error(
-                        `❌ GIF to MP4 conversion failed: ${err.message}`,
-                    );
+                    streamDeck.logger.error(`❌ GIF to MP4 conversion failed: ${err.message}`);
                     reject(err);
                 })
                 .save(outputPath);
@@ -82,15 +73,11 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
         return new Promise((resolve) => {
             ffmpeg.ffprobe(videoPath, (err: any, metadata: any) => {
                 if (err) {
-                    streamDeck.logger.warn(
-                        `⚠️ Could not read video dimensions: ${err.message}`,
-                    );
+                    streamDeck.logger.warn(`⚠️ Could not read video dimensions: ${err.message}`);
                     resolve({ width: 480, height: 270 }); // Safe defaults
                     return;
                 }
-                const videoStream = metadata.streams?.find(
-                    (s: any) => s.codec_type === 'video',
-                );
+                const videoStream = metadata.streams?.find((s: any) => s.codec_type === 'video');
                 const width = videoStream?.width || 480;
                 const height = videoStream?.height || 270;
                 resolve({ width, height });
@@ -122,9 +109,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                 return null;
             }
 
-            streamDeck.logger.info(
-                `📊 Video size: ${(stats.size / 1024 / 1024).toFixed(2)}MB`,
-            );
+            streamDeck.logger.info(`📊 Video size: ${(stats.size / 1024 / 1024).toFixed(2)}MB`);
 
             // Get video dimensions - use provided GIF dimensions or probe the MP4
             let width: number, height: number;
@@ -144,8 +129,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             const videoBuffer = fs.readFileSync(videoPath);
 
             // Get the PDS server's DID for service auth
-            const describeServer =
-                await agent.com.atproto.server.describeServer();
+            const describeServer = await agent.com.atproto.server.describeServer();
             const pdsDid = describeServer.data.did;
             streamDeck.logger.info(`📋 PDS DID: ${pdsDid}`);
 
@@ -191,9 +175,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                 uploadResult = (await uploadResponse.json()) as {
                     jobId: string;
                 };
-                streamDeck.logger.info(
-                    `📋 Video processing job started: ${uploadResult.jobId}`,
-                );
+                streamDeck.logger.info(`📋 Video processing job started: ${uploadResult.jobId}`);
             }
 
             // Poll for job completion via video.bsky.app directly
@@ -214,9 +196,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                 );
 
                 if (!statusRes.ok) {
-                    streamDeck.logger.error(
-                        `❌ Job status check failed: ${statusRes.status}`,
-                    );
+                    streamDeck.logger.error(`❌ Job status check failed: ${statusRes.status}`);
                     attempts++;
                     continue;
                 }
@@ -242,9 +222,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             }
 
             if (!jobStatus?.blob) {
-                streamDeck.logger.error(
-                    `❌ Video processing timed out or no blob returned`,
-                );
+                streamDeck.logger.error(`❌ Video processing timed out or no blob returned`);
                 return null;
             }
 
@@ -263,9 +241,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
     /**
      * Compress static image to meet Bluesky's size requirements
      */
-    private async compressImage(
-        imagePath: string,
-    ): Promise<{ buffer: Buffer; mimeType: string }> {
+    private async compressImage(imagePath: string): Promise<{ buffer: Buffer; mimeType: string }> {
         const MAX_SIZE = 950 * 1024; // 950KB to have some margin below 976KB limit
         const MAX_WIDTH = 2000;
         const MAX_HEIGHT = 2000;
@@ -273,9 +249,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
         streamDeck.logger.info(`🔍 Checking image size...`);
         const stats = fs.statSync(imagePath);
         const originalSize = stats.size;
-        streamDeck.logger.info(
-            `📊 Original size: ${(originalSize / 1024).toFixed(2)}KB`,
-        );
+        streamDeck.logger.info(`📊 Original size: ${(originalSize / 1024).toFixed(2)}KB`);
 
         // Handle non-GIF images (PNG, JPG, etc.) or static GIFs
         let image = sharp(imagePath);
@@ -297,7 +271,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
 
         // Try JPEG compression first (better compression)
         let buffer = await image.jpeg({ quality: 85 }).toBuffer();
-        let mimeType = 'image/jpeg';
+        const mimeType = 'image/jpeg';
 
         // If still too large, reduce quality
         if (buffer.length > MAX_SIZE) {
@@ -327,21 +301,12 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
         try {
             streamDeck.logger.info('🚀 Starting Bluesky Go Live action...');
 
-            const {
-                handle,
-                appPassword,
-                message,
-                twitchUrl,
-                imagePath,
-                imageAltText,
-                duration,
-            } = ev.payload.settings;
+            const { handle, appPassword, message, twitchUrl, imagePath, imageAltText, duration } =
+                ev.payload.settings;
 
             // Validate required settings
             if (!handle || !appPassword) {
-                streamDeck.logger.error(
-                    '❌ Missing required settings: handle or appPassword',
-                );
+                streamDeck.logger.error('❌ Missing required settings: handle or appPassword');
                 await ev.action.showAlert();
                 return;
             }
@@ -357,14 +322,11 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             if (imagePath) {
                 try {
                     const isGif = imagePath.toLowerCase().endsWith('.gif');
-                    const isAnimated =
-                        isGif && (await this.isAnimatedGif(imagePath));
+                    const isAnimated = isGif && (await this.isAnimatedGif(imagePath));
 
                     if (isAnimated) {
                         // Convert animated GIF to MP4 and upload as video
-                        streamDeck.logger.info(
-                            `📸 Processing animated GIF from ${imagePath}...`,
-                        );
+                        streamDeck.logger.info(`📸 Processing animated GIF from ${imagePath}...`);
 
                         try {
                             // Get GIF dimensions before conversion
@@ -372,12 +334,10 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                                 animated: true,
                             }).metadata();
                             const gifWidth = gifMeta.width || 480;
-                            const gifHeight =
-                                gifMeta.pageHeight || gifMeta.height || 270;
+                            const gifHeight = gifMeta.pageHeight || gifMeta.height || 270;
 
                             // Convert GIF to MP4
-                            const mp4Path =
-                                await this.convertGifToMp4(imagePath);
+                            const mp4Path = await this.convertGifToMp4(imagePath);
 
                             // Upload MP4 as video
                             const videoResult = await this.uploadVideoToBluesky(
@@ -390,10 +350,8 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                             // Clean up temporary MP4 file
                             try {
                                 fs.unlinkSync(mp4Path);
-                                streamDeck.logger.info(
-                                    `🗑️ Cleaned up temporary file: ${mp4Path}`,
-                                );
-                            } catch (cleanupError) {
+                                streamDeck.logger.info(`🗑️ Cleaned up temporary file: ${mp4Path}`);
+                            } catch {
                                 streamDeck.logger.warn(
                                     `⚠️ Could not delete temporary file: ${mp4Path}`,
                                 );
@@ -406,28 +364,22 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                                     alt: imageAltText || 'Stream Thumbnail',
                                     aspectRatio: videoResult.aspectRatio,
                                 };
-                                streamDeck.logger.info(
-                                    '✅ Animated GIF uploaded as video',
-                                );
+                                streamDeck.logger.info('✅ Animated GIF uploaded as video');
                             } else {
                                 // Fallback to static image if video upload fails
                                 streamDeck.logger.warn(
                                     '⚠️ Video upload failed, falling back to static image',
                                 );
-                                const { buffer, mimeType } =
-                                    await this.compressImage(imagePath);
+                                const { buffer, mimeType } = await this.compressImage(imagePath);
                                 const fileData = new Uint8Array(buffer);
-                                const upload = await agent.uploadBlob(
-                                    fileData,
-                                    { encoding: mimeType },
-                                );
+                                const upload = await agent.uploadBlob(fileData, {
+                                    encoding: mimeType,
+                                });
                                 embed = {
                                     $type: 'app.bsky.embed.images',
                                     images: [
                                         {
-                                            alt:
-                                                imageAltText ||
-                                                'Stream Thumbnail',
+                                            alt: imageAltText || 'Stream Thumbnail',
                                             image: upload.data.blob,
                                         },
                                     ],
@@ -438,14 +390,9 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                             }
                         } catch (conversionError) {
                             // Fallback to static image if conversion fails
-                            streamDeck.logger.error(
-                                `❌ GIF conversion failed: ${conversionError}`,
-                            );
-                            streamDeck.logger.warn(
-                                '⚠️ Falling back to static image',
-                            );
-                            const { buffer, mimeType } =
-                                await this.compressImage(imagePath);
+                            streamDeck.logger.error(`❌ GIF conversion failed: ${conversionError}`);
+                            streamDeck.logger.warn('⚠️ Falling back to static image');
+                            const { buffer, mimeType } = await this.compressImage(imagePath);
                             const fileData = new Uint8Array(buffer);
                             const upload = await agent.uploadBlob(fileData, {
                                 encoding: mimeType,
@@ -459,17 +406,12 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                                     },
                                 ],
                             };
-                            streamDeck.logger.info(
-                                '✅ GIF uploaded as static image (fallback)',
-                            );
+                            streamDeck.logger.info('✅ GIF uploaded as static image (fallback)');
                         }
                     } else {
                         // Upload as static image
-                        streamDeck.logger.info(
-                            `📸 Processing image from ${imagePath}...`,
-                        );
-                        const { buffer, mimeType } =
-                            await this.compressImage(imagePath);
+                        streamDeck.logger.info(`📸 Processing image from ${imagePath}...`);
+                        const { buffer, mimeType } = await this.compressImage(imagePath);
                         const fileData = new Uint8Array(buffer);
                         const upload = await agent.uploadBlob(fileData, {
                             encoding: mimeType,
@@ -483,21 +425,17 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                                 },
                             ],
                         };
-                        streamDeck.logger.info(
-                            '✅ Image uploaded successfully',
-                        );
+                        streamDeck.logger.info('✅ Image uploaded successfully');
                     }
                 } catch (error) {
-                    streamDeck.logger.error(
-                        `❌ Failed to upload media: ${error}`,
-                    );
+                    streamDeck.logger.error(`❌ Failed to upload media: ${error}`);
                     // Continue without image
                 }
             }
 
             // Create post
             streamDeck.logger.info('📮 Creating post...');
-            const postText = twitchUrl ? `${message || ''} ${twitchUrl}`.trim() : (message || '');
+            const postText = twitchUrl ? `${message || ''} ${twitchUrl}`.trim() : message || '';
             const rt = new RichText({ text: postText });
             await rt.detectFacets(agent);
             await agent.post({
@@ -536,9 +474,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                         `✅ Go Live status set successfully (${durationMins} minutes)`,
                     );
                 } catch (statusError) {
-                    streamDeck.logger.error(
-                        `❌ Failed to set Go Live status: ${statusError}`,
-                    );
+                    streamDeck.logger.error(`❌ Failed to set Go Live status: ${statusError}`);
                     streamDeck.logger.error(
                         `Status error details: ${JSON.stringify(statusError, null, 2)}`,
                     );
@@ -550,9 +486,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             streamDeck.logger.info('🎉 Bluesky Go Live action completed!');
         } catch (error) {
             streamDeck.logger.error(`❌ Bluesky Go Live failed: ${error}`);
-            streamDeck.logger.error(
-                `Error details: ${JSON.stringify(error, null, 2)}`,
-            );
+            streamDeck.logger.error(`Error details: ${JSON.stringify(error, null, 2)}`);
             await ev.action.showAlert();
         }
     }
