@@ -1,4 +1,4 @@
-import { BskyAgent } from '@atproto/api';
+import { BskyAgent, RichText } from '@atproto/api';
 import { action, KeyDownEvent, SingletonAction } from '@elgato/streamdeck';
 import streamDeck from '@elgato/streamdeck';
 import fs from 'fs';
@@ -498,8 +498,11 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             // Create post
             streamDeck.logger.info('📮 Creating post...');
             const postText = twitchUrl ? `${message || ''} ${twitchUrl}`.trim() : (message || '');
+            const rt = new RichText({ text: postText });
+            await rt.detectFacets(agent);
             await agent.post({
-                text: postText,
+                text: rt.text,
+                facets: rt.facets,
                 embed,
                 createdAt: new Date().toISOString(),
             });
