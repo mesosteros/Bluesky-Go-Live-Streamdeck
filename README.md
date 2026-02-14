@@ -37,6 +37,8 @@ A Stream Deck plugin that lets you announce your stream on Bluesky with a single
     - If you provided a stream URL, set your profile's Go Live status badge with a link to your stream
     - Show a checkmark on the button if successful, or an alert icon if something went wrong
 
+> **Tip:** If you only want to create a Bluesky post without setting the Go Live status badge, simply leave the **Twitch URL** field empty. The Go Live status and duration are only applied when a URL is provided.
+
 ### Setting Up the "End Stream" Action
 
 1. Drag the **End Stream on Bluesky** action onto a Stream Deck button.
