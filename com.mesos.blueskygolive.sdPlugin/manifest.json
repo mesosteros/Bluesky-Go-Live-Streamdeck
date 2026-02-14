@@ -43,7 +43,7 @@
 	"PropertyInspectorPath": "ui/property-inspector.html",
 	"Description": "Allows you to customize a go live post for bluesky and set the Go Live status as well",
 	"Icon": "imgs/plugin/plugin-icon",
-	"SDKVersion": 2,
+	"SDKVersion": 3,
 	"Software": {
 		"MinimumVersion": "6.9"
 	},
