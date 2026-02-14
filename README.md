@@ -104,6 +104,15 @@ npm run watch
 
 Rebuilds automatically on file changes.
 
+### Linting & Formatting
+
+```bash
+npm run lint          # Check for lint errors
+npm run lint:fix      # Auto-fix lint errors
+npm run format        # Format TypeScript files with Prettier
+npm run format:check  # Check formatting without writing
+```
+
 ### Project Structure
 
 ```
@@ -123,7 +132,9 @@ blueskygolive/
     bin/                 # Compiled output
     imgs/                # Plugin icons
     ui/                  # Copied UI files
-  rollup.config.mjs     # Build configuration
+  eslint.config.mjs     # ESLint configuration
+  .prettierrc            # Prettier configuration
+  rollup.config.mjs      # Build configuration
 ```
 
 ### Key Dependencies
@@ -132,3 +143,4 @@ blueskygolive/
 - **@atproto/api** - Bluesky AT Protocol client
 - **sharp** - Image compression and metadata
 - **fluent-ffmpeg** / **@ffmpeg-installer/ffmpeg** - GIF to MP4 conversion
+- **eslint** / **prettier** - Code linting and formatting
