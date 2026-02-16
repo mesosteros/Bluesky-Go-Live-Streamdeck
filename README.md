@@ -1,4 +1,4 @@
-# BlueSkyGoLive - Stream Deck Plugin
+# Bluesky Go Live - Streamdeck Plugin
 
 A Stream Deck plugin that lets you announce your stream on Bluesky with a single action activation or press. Create a post with a custom message, thumbnail (including animated GIFs), and automatically set your Bluesky "Go Live" status badge to your desired stream length. When your stream ends, a second action clears the live status if you activate or press it.
 
