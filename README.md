@@ -4,6 +4,9 @@ A Stream Deck plugin that lets you announce your stream on Bluesky with a single
 
 ## How to Use
 
+### The Quick Way
+The plugin is available on the [Elgato Marketplace](https://marketplace.elgato.com/product/blueskygolive-4a429189-e5d3-44d5-8a7a-38a5975385dc), simply install it and follow the setting up instructions below.
+
 ### Prerequisites
 
 - [Elgato Stream Deck](https://www.elgato.com/stream-deck) with Stream Deck software v6.9 or later
