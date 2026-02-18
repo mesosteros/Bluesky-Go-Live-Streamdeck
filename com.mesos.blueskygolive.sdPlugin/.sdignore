@@ -1,0 +1,23 @@
+# Exclude development/test artifacts from published plugin
+
+# fluent-ffmpeg: coverage data, docs, old files, build tools
+node_modules/fluent-ffmpeg/coverage/
+node_modules/fluent-ffmpeg/doc/
+node_modules/fluent-ffmpeg/OLD/
+node_modules/fluent-ffmpeg/tools/
+
+# sharp: C++ source code (not needed at runtime)
+node_modules/sharp/src/
+
+# Test files
+node_modules/isexe/test/
+
+# Backup/temp files created by editors
+**/*.js~
+**/*.json~
+**/*.ts~
+**/*.sh~
+**/*.env
+
+# Logs
+logs/
