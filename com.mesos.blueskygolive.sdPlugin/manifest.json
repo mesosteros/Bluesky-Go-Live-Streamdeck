@@ -1,8 +1,8 @@
 {
 	"Name": "BlueSkyGoLive",
-	"Version": "1.0.0.0",
+	"Version": "1.1.0.0",
 	"Author": "mesos",
-	"URL": "https://github.com/mesos/blueskygolive",
+	"URL": "https://github.com/mesosteros/Bluesky-Go-Live-Streamdeck",
 	"Actions": [
 		{
 			"Name": "Go Live on Bluesky",
