@@ -131,7 +131,6 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             // Get the PDS server's DID for service auth
             const describeServer = await agent.com.atproto.server.describeServer();
             const pdsDid = describeServer.data.did;
-            streamDeck.logger.info(`📋 PDS DID: ${pdsDid}`);
 
             // Get service auth token for video upload
             const serviceAuth = await agent.com.atproto.server.getServiceAuth({
@@ -475,9 +474,6 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                     );
                 } catch (statusError) {
                     streamDeck.logger.error(`❌ Failed to set Go Live status: ${statusError}`);
-                    streamDeck.logger.error(
-                        `Status error details: ${JSON.stringify(statusError, null, 2)}`,
-                    );
                 }
             }
 
@@ -486,7 +482,6 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
             streamDeck.logger.info('🎉 Bluesky Go Live action completed!');
         } catch (error) {
             streamDeck.logger.error(`❌ Bluesky Go Live failed: ${error}`);
-            streamDeck.logger.error(`Error details: ${JSON.stringify(error, null, 2)}`);
             await ev.action.showAlert();
         }
     }
