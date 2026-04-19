@@ -67,6 +67,22 @@
 					"TitleAlignment": "middle"
 				}
 			]
+		},
+		{
+			"Name": "Clear Live Status on Bluesky",
+			"UUID": "com.mesos.blueskygolive.clearstatus",
+			"Icon": "imgs/actions/end-live/end-live-action",
+			"Tooltip": "Clear your Bluesky live badge without ending a stream post",
+			"PropertyInspectorPath": "ui/property-inspector-clear-status.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/end-live/end-live-key",
+					"TitleAlignment": "middle"
+				}
+			]
 		}
 	],
 	"Category": "BlueSkyGoLive",
