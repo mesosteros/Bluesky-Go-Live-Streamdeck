@@ -35,6 +35,38 @@
 					"TitleAlignment": "middle"
 				}
 			]
+		},
+		{
+			"Name": "Post to Bluesky",
+			"UUID": "com.mesos.blueskygolive.postonly",
+			"Icon": "imgs/actions/go-live/go-live-action",
+			"Tooltip": "Post a message and optional image to Bluesky",
+			"PropertyInspectorPath": "ui/property-inspector-post-only.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/go-live/go-live-key",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "Set Live Status on Bluesky",
+			"UUID": "com.mesos.blueskygolive.setstatus",
+			"Icon": "imgs/actions/go-live/go-live-action",
+			"Tooltip": "Set your Bluesky live badge without posting",
+			"PropertyInspectorPath": "ui/property-inspector-set-status.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/go-live/go-live-key",
+					"TitleAlignment": "middle"
+				}
+			]
 		}
 	],
 	"Category": "BlueSkyGoLive",

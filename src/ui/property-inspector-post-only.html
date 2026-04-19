@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Post to Bluesky Settings</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background: #2d2d2d;
+                color: #d8d8d8;
+                margin: 0;
+                padding: 16px;
+                font-size: 13px;
+            }
+            .sdpi-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sdpi-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .sdpi-item-label {
+                font-weight: 500;
+                font-size: 12px;
+                color: #9a9a9a;
+            }
+            .sdpi-item-value {
+                background: #3d3d3d;
+                border: 1px solid #5a5a5a;
+                border-radius: 4px;
+                color: #d8d8d8;
+                padding: 8px;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .sdpi-item-value:focus {
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
+                border-color: #0e6edb;
+            }
+            textarea.sdpi-item-value {
+                min-height: 60px;
+                resize: vertical;
+            }
+            .file-input-wrapper {
+                display: flex;
+                gap: 8px;
+            }
+            .file-input-wrapper input[type="text"] {
+                flex: 1;
+            }
+            .browse-button {
+                background: #0e6edb;
+                border: none;
+                border-radius: 4px;
+                color: white;
+                padding: 8px 16px;
+                cursor: pointer;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+            .browse-button:hover { background: #0d5db8; }
+            .browse-button:active { background: #0a4d99; }
+            .browse-button:focus {
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
+            }
+            input[type="file"] { display: none; }
+        </style>
+    </head>
+    <body>
+        <div class="sdpi-wrapper" role="form" aria-label="Post to Bluesky Settings">
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="handle">Bluesky Handle</label>
+                <input
+                    class="sdpi-item-value"
+                    id="handle"
+                    type="text"
+                    placeholder="yourname.bsky.social"
+                    autocomplete="username"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="appPassword">App Password</label>
+                <input
+                    class="sdpi-item-value"
+                    id="appPassword"
+                    type="password"
+                    placeholder="Paste your app password here"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="message">Post Message</label>
+                <textarea
+                    class="sdpi-item-value"
+                    id="message"
+                    placeholder="Streaming some D&amp;D tonight!"
+                ></textarea>
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="imagePath">Image / GIF Path</label>
+                <div class="file-input-wrapper">
+                    <input
+                        class="sdpi-item-value"
+                        id="imagePath"
+                        type="text"
+                        placeholder="C:\path\to\image.png"
+                        aria-describedby="browseButton"
+                    />
+                    <button
+                        class="browse-button"
+                        id="browseButton"
+                        type="button"
+                        aria-label="Browse for image"
+                    >Browse...</button>
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        aria-hidden="true"
+                        tabindex="-1"
+                    />
+                </div>
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="imageAltText">Image Alt Text</label>
+                <input
+                    type="text"
+                    class="sdpi-item-value"
+                    id="imageAltText"
+                    placeholder="Description of the image"
+                />
+            </div>
+        </div>
+
+        <script src="property-inspector-post-only.js"></script>
+    </body>
+</html>
