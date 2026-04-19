@@ -5,6 +5,7 @@ import typescript from '@rollup/plugin-typescript';
 import path from 'node:path';
 import url from 'node:url';
 import json from '@rollup/plugin-json';
+import fs from 'node:fs';
 
 const isWatching = !!process.env.ROLLUP_WATCH;
 const sdPlugin = 'com.mesos.blueskygolive.sdPlugin';
@@ -57,6 +58,20 @@ const config = {
                     source: `{ "type": "module" }`,
                     type: 'asset',
                 });
+            },
+        },
+        {
+            name: 'copy-ui-files',
+            buildStart() {
+                const srcDir = 'src/ui';
+                const destDir = `${sdPlugin}/ui`;
+                fs.mkdirSync(destDir, { recursive: true });
+                for (const file of fs.readdirSync(srcDir)) {
+                    fs.copyFileSync(
+                        path.join(srcDir, file),
+                        path.join(destDir, file),
+                    );
+                }
             },
         },
     ],
