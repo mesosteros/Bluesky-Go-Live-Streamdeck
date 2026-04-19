@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Set Live Status Settings</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background: #2d2d2d;
+                color: #d8d8d8;
+                margin: 0;
+                padding: 16px;
+                font-size: 13px;
+            }
+            .sdpi-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sdpi-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .sdpi-item-label {
+                font-weight: 500;
+                font-size: 12px;
+                color: #9a9a9a;
+            }
+            .sdpi-item-value {
+                background: #3d3d3d;
+                border: 1px solid #5a5a5a;
+                border-radius: 4px;
+                color: #d8d8d8;
+                padding: 8px;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .sdpi-item-value:focus {
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
+                border-color: #0e6edb;
+            }
+            .info-text {
+                color: #9a9a9a;
+                font-size: 12px;
+                margin-top: 8px;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sdpi-wrapper" role="form" aria-label="Set Live Status Settings">
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="handle">Bluesky Handle</label>
+                <input
+                    class="sdpi-item-value"
+                    id="handle"
+                    type="text"
+                    placeholder="yourname.bsky.social"
+                    autocomplete="username"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="appPassword">App Password</label>
+                <input
+                    class="sdpi-item-value"
+                    id="appPassword"
+                    type="password"
+                    placeholder="Paste your app password here"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="streamUrl">Stream URL</label>
+                <input
+                    class="sdpi-item-value"
+                    id="streamUrl"
+                    type="url"
+                    placeholder="https://twitch.tv/yourchannel"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="duration">Live Duration</label>
+                <select class="sdpi-item-value" id="duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60">1 hour</option>
+                    <option value="90">1.5 hours</option>
+                    <option value="120" selected>2 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="240">4 hours</option>
+                </select>
+            </div>
+
+            <p class="info-text">
+                Sets your live badge on Bluesky without posting. Pair this with
+                "Post to Bluesky" or use it on its own alongside your stream start key.
+            </p>
+        </div>
+
+        <script src="property-inspector-set-status.js"></script>
+    </body>
+</html>
