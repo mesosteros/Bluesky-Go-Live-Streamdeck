@@ -20,7 +20,7 @@
 				}
 			]
 		},
-{
+		{
 			"Name": "Post to Bluesky",
 			"UUID": "com.mesos.blueskygolive.postonly",
 			"Icon": "imgs/actions/go-live/go-live-action",
@@ -40,7 +40,7 @@
 			"Name": "Set Live Status on Bluesky",
 			"UUID": "com.mesos.blueskygolive.setstatus",
 			"Icon": "imgs/actions/go-live/go-live-action",
-			"Tooltip": "Set your Bluesky live badge without posting",
+			"Tooltip": "Set your Bluesky live badge without posting — supports Twitch, YouTube, Substack, beehiiv and more",
 			"PropertyInspectorPath": "ui/property-inspector-set-status.html",
 			"Controllers": [
 				"Keypad"
@@ -56,7 +56,7 @@
 			"Name": "Clear Live Status on Bluesky",
 			"UUID": "com.mesos.blueskygolive.clearstatus",
 			"Icon": "imgs/actions/end-live/end-live-action",
-			"Tooltip": "Clear your Bluesky live badge without ending a stream post",
+			"Tooltip": "Clear your Bluesky live badge",
 			"PropertyInspectorPath": "ui/property-inspector-clear-status.html",
 			"Controllers": [
 				"Keypad"
