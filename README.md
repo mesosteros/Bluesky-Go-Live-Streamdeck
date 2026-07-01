@@ -5,6 +5,7 @@ A Stream Deck plugin that lets you manage your Bluesky presence while streaming 
 ## How to Use
 
 ### The Quick Way
+
 The plugin is available on the [Elgato Marketplace](https://marketplace.elgato.com/product/blueskygolive-4a429189-e5d3-44d5-8a7a-38a5975385dc), simply install it and follow the setting up instructions below.
 
 ### Prerequisites
@@ -17,13 +18,13 @@ The plugin is available on the [Elgato Marketplace](https://marketplace.elgato.c
 
 The plugin adds the following actions to the **BlueSkyGoLive** category in Stream Deck:
 
-| Action | Description |
-| --- | --- |
-| **Go Live on Bluesky** | Posts to Bluesky and sets your live status badge in one press |
-| **End Stream on Bluesky** | Clears your live status and posts a stream-end message |
-| **Post to Bluesky** | Posts a message and optional image to Bluesky, without touching the live badge |
-| **Set Live Status on Bluesky** | Sets your live badge only, without posting |
-| **Clear Live Status on Bluesky** | Clears your live badge only, without posting |
+| Action                           | Description                                                                    |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| **Go Live on Bluesky**           | Posts to Bluesky and sets your live status badge in one press                  |
+| **End Stream on Bluesky**        | Clears your live status and posts a stream-end message                         |
+| **Post to Bluesky**              | Posts a message and optional image to Bluesky, without touching the live badge |
+| **Set Live Status on Bluesky**   | Sets your live badge only, without posting                                     |
+| **Clear Live Status on Bluesky** | Clears your live badge only, without posting                                   |
 
 **Which should I use?** If you want everything in one button, use **Go Live on Bluesky**. If you prefer finer control — for example, triggering your post and your live badge separately, or combining them with other Stream Deck actions — use the standalone actions.
 
@@ -35,22 +36,23 @@ The plugin adds the following actions to the **BlueSkyGoLive** category in Strea
 
 Drag the action onto a button and fill in the settings panel:
 
-| Field | Required | Description |
-| --- | --- | --- |
-| **Bluesky Handle** | Yes | Your Bluesky handle (e.g. `yourname.bsky.social`) |
-| **App Password** | Yes | Your Bluesky App Password (not your account password) |
-| **Post Message** | No | The text content of your post |
-| **Twitch URL** | No | Your stream URL. If provided, enables the Go Live badge and appends the link to your post. |
-| **Go Live Duration** | No | How long the live badge stays on your profile (5 min – 4 hours). Defaults to 2 hours. |
-| **Thumbnail Path** | No | Path to an image or animated GIF. Use **Browse** or paste a path directly. |
-| **Image Alt Text** | No | Alt text for the thumbnail (defaults to "Stream Thumbnail"). |
+| Field                                                               | Required | Description                                                                                |
+| ------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------ |
+| **Bluesky Handle**                                                  | Yes      | Your Bluesky handle (e.g. `yourname.bsky.social`)                                          |
+| **App Password**                                                    | Yes      | Your Bluesky App Password (not your account password)                                      |
+| **Post Message**                                                    | No       | The text content of your post                                                              |
+| **Twitch, Youtube, Substack, beehiiv, Streamplace or Bluecast URL** | No       | Your stream URL. If provided, enables the Go Live badge and appends the link to your post. |
+| **Go Live Duration**                                                | No       | How long the live badge stays on your profile (5 min – 4 hours). Defaults to 2 hours.      |
+| **Thumbnail Path**                                                  | No       | Path to an image or animated GIF. Use **Browse** or paste a path directly.                 |
+| **Image Alt Text**                                                  | No       | Alt text for the thumbnail (defaults to "Stream Thumbnail").                               |
 
 When pressed, the action will:
+
 - Create a Bluesky post with your message and thumbnail
 - If a stream URL is provided, set your profile's live badge with a link to your stream
 - Show a checkmark on the button if successful, or an alert icon if something went wrong
 
-> **Tip:** Leave the **Twitch URL** field empty to post without setting the live badge.
+> **Tip:** Leave the **Twitch, Youtube, Substack, beehiiv, Streamplace or Bluecast URL** field empty to post without setting the live badge.
 
 ---
 
@@ -66,13 +68,13 @@ If the live badge has already expired by the time you press it, the plugin handl
 
 Posts a message and optional image to Bluesky without affecting the live badge. Useful for announcements, mid-stream updates, or any post you want to send independently from your stream status.
 
-| Field | Required | Description |
-| --- | --- | --- |
-| **Bluesky Handle** | Yes | Your Bluesky handle |
-| **App Password** | Yes | Your Bluesky App Password |
-| **Post Message** | No | The text content of your post |
-| **Image / GIF Path** | No | Path to an image or animated GIF to attach |
-| **Image Alt Text** | No | Alt text for the image |
+| Field                | Required | Description                                |
+| -------------------- | -------- | ------------------------------------------ |
+| **Bluesky Handle**   | Yes      | Your Bluesky handle                        |
+| **App Password**     | Yes      | Your Bluesky App Password                  |
+| **Post Message**     | No       | The text content of your post              |
+| **Image / GIF Path** | No       | Path to an image or animated GIF to attach |
+| **Image Alt Text**   | No       | Alt text for the image                     |
 
 ---
 
@@ -80,12 +82,12 @@ Posts a message and optional image to Bluesky without affecting the live badge. 
 
 Sets your Bluesky live badge without creating a post. Pair this with **Post to Bluesky** if you want to control the two separately, or use it on its own alongside another key that starts your stream.
 
-| Field | Required | Description |
-| --- | --- | --- |
-| **Bluesky Handle** | Yes | Your Bluesky handle |
-| **App Password** | Yes | Your Bluesky App Password |
-| **Stream URL** | Yes | Your stream URL (must be a recognised streaming platform, e.g. `https://twitch.tv/yourchannel`) |
-| **Live Duration** | No | How long the badge stays active. Defaults to 2 hours. |
+| Field              | Required | Description                                                                                     |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------- |
+| **Bluesky Handle** | Yes      | Your Bluesky handle                                                                             |
+| **App Password**   | Yes      | Your Bluesky App Password                                                                       |
+| **Stream URL**     | Yes      | Your stream URL (must be a recognised streaming platform, e.g. `https://twitch.tv/yourchannel`) |
+| **Live Duration**  | No       | How long the badge stays active. Defaults to 2 hours.                                           |
 
 ---
 
@@ -93,10 +95,10 @@ Sets your Bluesky live badge without creating a post. Pair this with **Post to B
 
 Clears your Bluesky live badge without posting. Use this alongside **Set Live Status** for full manual control, or whenever you want to remove the badge without triggering the full end-stream flow.
 
-| Field | Required | Description |
-| --- | --- | --- |
-| **Bluesky Handle** | Yes | Your Bluesky handle |
-| **App Password** | Yes | Your Bluesky App Password |
+| Field              | Required | Description               |
+| ------------------ | -------- | ------------------------- |
+| **Bluesky Handle** | Yes      | Your Bluesky handle       |
+| **App Password**   | Yes      | Your Bluesky App Password |
 
 ---
 
