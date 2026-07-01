@@ -20,23 +20,7 @@
 				}
 			]
 		},
-		{
-			"Name": "End Stream on Bluesky",
-			"UUID": "com.mesos.blueskygolive.end",
-			"Icon": "imgs/actions/end-live/end-live-action",
-			"Tooltip": "Clear your live status on Bluesky",
-			"PropertyInspectorPath": "ui/property-inspector-end.html",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/end-live/end-live-key",
-					"TitleAlignment": "middle"
-				}
-			]
-		},
-		{
+{
 			"Name": "Post to Bluesky",
 			"UUID": "com.mesos.blueskygolive.postonly",
 			"Icon": "imgs/actions/go-live/go-live-action",
