@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Post Twitch Clip Settings</title>
+        <style>
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+                    sans-serif;
+                background: #2d2d2d;
+                color: #d8d8d8;
+                margin: 0;
+                padding: 16px;
+                font-size: 13px;
+            }
+            .sdpi-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sdpi-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .sdpi-item-label {
+                font-weight: 500;
+                font-size: 12px;
+                color: #9a9a9a;
+            }
+            .sdpi-item-value {
+                background: #3d3d3d;
+                border: 1px solid #5a5a5a;
+                border-radius: 4px;
+                color: #d8d8d8;
+                padding: 8px;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .sdpi-item-value:focus {
+                outline: 2px solid #0e6edb;
+                outline-offset: 1px;
+                border-color: #0e6edb;
+            }
+            textarea.sdpi-item-value {
+                resize: vertical;
+                min-height: 60px;
+            }
+            .info-text {
+                color: #9a9a9a;
+                font-size: 12px;
+                margin-top: 8px;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sdpi-wrapper" role="form" aria-label="Post Twitch Clip Settings">
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="handle">Bluesky Handle</label>
+                <input
+                    class="sdpi-item-value"
+                    id="handle"
+                    type="text"
+                    placeholder="yourname.bsky.social"
+                    autocomplete="username"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="appPassword">App Password</label>
+                <input
+                    class="sdpi-item-value"
+                    id="appPassword"
+                    type="password"
+                    placeholder="Paste your app password here"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="twitchChannel">Twitch Channel</label>
+                <input
+                    class="sdpi-item-value"
+                    id="twitchChannel"
+                    type="text"
+                    placeholder="yourchannel"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="twitchClientId">Twitch Client ID</label>
+                <input
+                    class="sdpi-item-value"
+                    id="twitchClientId"
+                    type="text"
+                    placeholder="Your Twitch app Client ID"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="twitchAccessToken">Twitch Access Token</label>
+                <input
+                    class="sdpi-item-value"
+                    id="twitchAccessToken"
+                    type="password"
+                    placeholder="User token with clips:edit scope"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="sdpi-item">
+                <label class="sdpi-item-label" for="message">Post Message (optional)</label>
+                <textarea
+                    class="sdpi-item-value"
+                    id="message"
+                    placeholder="Text to post alongside the clip"
+                ></textarea>
+            </div>
+
+            <p class="info-text">
+                Creates a clip of your live Twitch stream and posts it to Bluesky as a link card.
+                Only works while you are live. The access token must be a user token with the
+                clips:edit scope (e.g. from twitchtokengenerator.com) — tokens expire after about
+                60 days, so refresh it when the key starts failing.
+            </p>
+        </div>
+
+        <script src="property-inspector-twitch-clip.js"></script>
+    </body>
+</html>

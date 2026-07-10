@@ -27,6 +27,46 @@ export async function postToBluesky(
     });
 }
 
+export async function buildExternalEmbed(
+    agent: BskyAgent,
+    uri: string,
+    title: string,
+    description: string,
+    thumbnailUrl?: string,
+): Promise<unknown> {
+    let thumb: unknown = undefined;
+
+    if (thumbnailUrl) {
+        try {
+            streamDeck.logger.info(`🖼️ Fetching link card thumbnail...`);
+            const res = await fetch(thumbnailUrl);
+            if (res.ok) {
+                const buffer = Buffer.from(await res.arrayBuffer());
+                const jpeg = await sharp(buffer).jpeg({ quality: 85 }).toBuffer();
+                const upload = await agent.uploadBlob(new Uint8Array(jpeg), {
+                    encoding: 'image/jpeg',
+                });
+                thumb = upload.data.blob;
+                streamDeck.logger.info('✅ Thumbnail uploaded');
+            } else {
+                streamDeck.logger.warn(`⚠️ Thumbnail fetch failed: ${res.status}`);
+            }
+        } catch (error) {
+            streamDeck.logger.warn(`⚠️ Thumbnail upload failed, posting card without it: ${error}`);
+        }
+    }
+
+    return {
+        $type: 'app.bsky.embed.external',
+        external: {
+            uri,
+            title,
+            description,
+            ...(thumb ? { thumb } : {}),
+        },
+    };
+}
+
 export async function isAnimatedGif(imagePath: string): Promise<boolean> {
     const image = sharp(imagePath, { animated: true });
     const metadata = await image.metadata();
