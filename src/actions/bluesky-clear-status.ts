@@ -34,9 +34,7 @@ export class BluskyClearStatusAction extends SingletonAction<Settings> {
                     errorMessage.includes('RecordNotFound') ||
                     errorMessage.includes('Could not find record')
                 ) {
-                    streamDeck.logger.info(
-                        'ℹ️ Live status was already cleared — no action needed',
-                    );
+                    streamDeck.logger.info('ℹ️ Live status was already cleared — no action needed');
                 } else {
                     throw deleteError;
                 }

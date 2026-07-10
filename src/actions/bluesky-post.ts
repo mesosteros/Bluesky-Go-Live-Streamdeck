@@ -85,9 +85,7 @@ export class BlueskyPostAction extends SingletonAction<Settings> {
                                 );
                             }
                         } catch (conversionError) {
-                            streamDeck.logger.error(
-                                `❌ GIF conversion failed: ${conversionError}`,
-                            );
+                            streamDeck.logger.error(`❌ GIF conversion failed: ${conversionError}`);
                             streamDeck.logger.warn('⚠️ Falling back to static image');
                             embed = await this.uploadStaticImage(agent, imagePath, imageAltText);
                             streamDeck.logger.info('✅ GIF uploaded as static image (fallback)');
